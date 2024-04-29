@@ -21,7 +21,8 @@ public class Produto implements Serializable {
     private Double preco;
     private String imagem;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "produto_categoria",joinColumns = @JoinColumn(name = "IdProduto"),inverseJoinColumns = @JoinColumn(name = "IdCategoria"))
     private Set<Categoria> categorias = new HashSet<Categoria>();
 
     public Produto() {}
