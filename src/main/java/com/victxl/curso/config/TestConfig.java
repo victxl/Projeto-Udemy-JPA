@@ -1,14 +1,8 @@
 package com.victxl.curso.config;
 
-import com.victxl.curso.entities.Categoria;
-import com.victxl.curso.entities.Pedido;
-import com.victxl.curso.entities.Produto;
-import com.victxl.curso.entities.Usuario;
+import com.victxl.curso.entities.*;
 import com.victxl.curso.entities.enums.StatusPedido;
-import com.victxl.curso.repositories.RepositoryCategoria;
-import com.victxl.curso.repositories.RepositoryPedido;
-import com.victxl.curso.repositories.RepositoryProduto;
-import com.victxl.curso.repositories.RepositoryUsuario;
+import com.victxl.curso.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +22,8 @@ public class TestConfig implements CommandLineRunner {
     private RepositoryCategoria repositoryCategoria;
     @Autowired
     private RepositoryProduto repositoryProduto;
+    @Autowired
+    private RepositoryItemPedido repositoryItemPedido;
 
 
 
@@ -65,6 +61,14 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategorias().add(cat2);
 
         repositoryProduto.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+
+
+        ItemPedido oi1 = new ItemPedido(o1, p1, 2, p1.getPreco());
+        ItemPedido oi2 = new ItemPedido(o1, p3, 1, p3.getPreco());
+        ItemPedido oi3 = new ItemPedido(o2, p3, 2, p3.getPreco());
+        ItemPedido oi4 = new ItemPedido(o3, p5, 2, p5.getPreco());
+
+        repositoryItemPedido.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
     }
     
