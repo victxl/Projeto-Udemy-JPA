@@ -3,7 +3,9 @@ package com.victxl.curso.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "categoria")
@@ -14,6 +16,9 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    @Transient
+    private Set<Produto> produtos = new HashSet<>();
 
     public Categoria() {}
 
@@ -50,5 +55,10 @@ public class Categoria implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Set<Produto> getProdutos() {
+        return produtos;
+    }
+
 
 }
