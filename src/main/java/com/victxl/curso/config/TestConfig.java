@@ -1,8 +1,10 @@
 package com.victxl.curso.config;
 
+import com.victxl.curso.entities.Categoria;
 import com.victxl.curso.entities.Pedido;
 import com.victxl.curso.entities.Usuario;
 import com.victxl.curso.entities.enums.StatusPedido;
+import com.victxl.curso.repositories.RepositoryCategoria;
 import com.victxl.curso.repositories.RepositoryPedido;
 import com.victxl.curso.repositories.RepositoryUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class TestConfig implements CommandLineRunner {
     private RepositoryUsuario repositoryUsuario;
     @Autowired
     private RepositoryPedido repositoryPedido;
+    @Autowired
+    private RepositoryCategoria repositoryCategoria;
 
 
 
@@ -34,7 +38,11 @@ public class TestConfig implements CommandLineRunner {
         Pedido o2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), u2,StatusPedido.ESPERANDO_PAGAMENTO);
         Pedido o3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), u1,StatusPedido.ENVIADO);
 
+        Categoria cat1 = new Categoria(null, "Electronics");
+        Categoria cat2 = new Categoria(null, "Books");
+        Categoria cat3 = new Categoria(null, "Computers");
 
+        repositoryCategoria.saveAll(Arrays.asList(cat1, cat2, cat3));
         repositoryUsuario.saveAll(Arrays.asList(u1,u2,u3));
         repositoryPedido.saveAll(Arrays.asList(o1,o2,o3));
     }
