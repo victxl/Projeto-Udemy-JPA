@@ -61,6 +61,14 @@ public class ItemPedido implements Serializable {
         id.setProduto(produto);
     }
 
+    public Double getSubTotal(){
+        return preco*quantidade;
+    }
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
