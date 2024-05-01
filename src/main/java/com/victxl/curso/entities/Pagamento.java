@@ -19,7 +19,7 @@ public class Pagamento implements Serializable {
     private Long id;
     private Instant momento;
 
-    
+
     @JsonIgnore
     @OneToOne
     @MapsId
