@@ -1,5 +1,6 @@
 package com.victxl.curso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -24,6 +25,9 @@ public class Produto implements Serializable {
     @ManyToMany
     @JoinTable(name = "produto_categoria",joinColumns = @JoinColumn(name = "IdProduto"),inverseJoinColumns = @JoinColumn(name = "IdCategoria"))
     private Set<Categoria> categorias = new HashSet<Categoria>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto() {}
 
@@ -77,6 +81,14 @@ public class Produto implements Serializable {
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+    @JsonIgnore
+    public Set<Pedido> getPedidos() {
+        Set<Pedido> set  = new HashSet<>();
+            for (ItemPedido x : itens){
+                set.add(x.getPedido());
+            }
+            return set;
     }
 
     @Override
