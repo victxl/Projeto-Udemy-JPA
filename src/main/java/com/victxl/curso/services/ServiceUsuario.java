@@ -2,6 +2,7 @@ package com.victxl.curso.services;
 
 import com.victxl.curso.entities.Usuario;
 import com.victxl.curso.repositories.RepositoryUsuario;
+import com.victxl.curso.services.exceptions.ResouceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class ServiceUsuario {
     public Usuario findById(Long id) {
         Optional<Usuario> obj = repository.findById(id);
 
-        return obj.get();
+        return obj.orElseThrow(() -> new ResouceNotFoundException(id));
     }
 
     public Usuario insert(Usuario usuario) {
