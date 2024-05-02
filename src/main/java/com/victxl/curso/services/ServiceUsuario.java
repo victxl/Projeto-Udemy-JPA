@@ -4,13 +4,13 @@ import com.victxl.curso.entities.Usuario;
 import com.victxl.curso.repositories.RepositoryUsuario;
 import com.victxl.curso.services.exceptions.DatabaseException;
 import com.victxl.curso.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.zip.DataFormatException;
 
 @Service
 public class ServiceUsuario {
@@ -44,10 +44,15 @@ public class ServiceUsuario {
             throw new DatabaseException(e.getMessage());
         }
     }
+
     public Usuario update(Long id, Usuario usuario) {
-        Usuario entity = repository.getReferenceById(id);
-        updateData(entity,usuario);
-        return repository.save(entity);
+        try {
+            Usuario entity = repository.getReferenceById(id);
+            updateData(entity, usuario);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Usuario entity, Usuario usuario) {
