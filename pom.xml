@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.victxl</groupId>
-	<artifactId>curso</artifactId>
+	<artifactId>projeto-udemy-jpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>curso</name>
 	<description>Demo project for Spring Boot</description>
